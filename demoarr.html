@@ -1,0 +1,79 @@
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<title>Demo Javascript</title>
+	</head>
+	<body>
+		<div class="content col-md-9" style="margin: 0 auto; float: none">
+			<div class="row">
+				<div class="<col form-group>">
+					<label for="genderList">Gender</label>
+					<select name="genderFilter" id="genderFilter" class="form-control">
+						<option value="null">All</option>
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+					</select>
+				</div>
+
+				<label for="userList" style="margin-top: 20px">Danh sách người nổi tiếng </label>
+				<ul class="list-group" id="userList">
+					
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script  type="text/javascript" charset="utf-8">
+		var users = [{
+			name : 'Romelo Lukaku',
+			age : 29,
+			gender : 'male'
+		},
+		{
+			name : 'Ria Mikami',
+			age : 23,
+			gender : 'female'
+		},
+		{
+			name : 'David De Gea',
+			age : 25,
+			gender : 'male'
+		},
+		{
+			name : 'Yuki Hatano',
+			age : 30,
+			gender : 'female'
+
+		},
+		{
+			name : 'Taylor Swift',
+			age : 28,
+			gender : 'female'
+		}];
+		var userList = $('#userList');
+		var genderFilter = $('#genderFilter');
+		render(userList, users);
+		genderFilter.on('change', function() {
+			var selectedValue = this.value;
+			var filterUser = users.filter(function(user) {
+				return user.gender === selectedValue;
+			});
+			render(userList, filterUser);
+		});
+
+		function render(container , items){
+			// biến đổi mảng objcet ---> mảng string chứa mã html
+			var htmlItems = items.map(function(item) {
+				return '<li class = "list-group-item">' + item.name + '</li>';
+			}) ;
+			// cộng dồn chuỗi lại
+			var html = htmlItems.join('');
+			console.log(html);
+			container.html(html);
+		};
+
+	</script>
+	</html>
